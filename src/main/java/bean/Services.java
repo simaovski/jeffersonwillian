@@ -54,14 +54,19 @@ public class Services {
         lst = new controller.ServicesController().getAll();
     }
     
-    public void save(){
+    public boolean save() {
         model.Services s = new model.Services();
         s.setName(name);
         Users u = new Users();
         u.setId(idUser);
         s.setIdUser(u);
-        
-        new controller.ServicesController().persist(s);
-    }
+        try {        
+            new controller.ServicesController().persist(s);
+            return true;
+        } catch (Exception e) {
+            System.out.println("FALHA NA PERSISTENCIA");
+            return false;
+        }//FIM DO CATCH
+    }//FIM DO METODO
     
 }
